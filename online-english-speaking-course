@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Book Your Free Trial – FluentHub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+.left-bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 56.5%;
+  height: 100vh;
+  background: url('bg.png') center center / cover no-repeat;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.top-bar {
+  width: 100%;
+  height: 64px;
+  background-color: #4169E1;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+body { padding-top: 64px; }
+.logo-container { display: flex; align-items: center; gap: 12px; }
+.logo { height: 40px; width: auto; }
+.site-name { font-size: 1.4rem; font-weight: 700; color: white; }
+:root { --sky: #87CEEB; --panel-width: 50%; --content-max: 420px; --accent: #0a3b5b; }
+* { box-sizing: border-box }
+html,body { height: 100% }
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: var(--accent);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.01)),
+    radial-gradient(circle at 10% 10%, rgba(255,255,255,0.015), transparent 8%),
+    linear-gradient(90deg, rgba(255,255,255,0.015), transparent 30%),
+    var(--sky);
+  min-height: 100vh;
+}
+.panel {
+  position: fixed;
+  top: 1; /* fixed invalid value */
+  right: 0;
+  width: var(--panel-width);
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.content {
+  width: 100%;
+  max-width: var(--content-max);
+  text-align: left;
+  background: rgba(255,255,255,0.03);
+  padding: 28px 28px 28px 48px;
+  border-radius: 12px;
+  backdrop-filter: blur(2px);
+  box-shadow: 0 8px 24px rgba(10,59,91,0.06);
+}
+.hero-title { margin: 0 0 20px 0; font-weight: 700; letter-spacing: 0.2px; color: var(--accent); font-size: 1.6rem; line-height: 1.1; }
+.hero-title.large { font-size: 1.8rem; }
+.cta {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--accent);
+  font-weight: 600;
+  border: 2px solid rgba(10,59,91,0.12);
+  text-decoration: none;
+}
+form { display: flex; flex-direction: column; gap: 14px; }
+label { font-weight: 600; }
+.required-star { color: red; }
+input, textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.2);
+  font-size: 1rem;
+  width: 100%;
+  max-width: 300px;
+}
+button {
+  padding: 10px 16px;
+  background-color: #4169E1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+button:disabled { background-color: #ccc; cursor: not-allowed; }
+@media (max-width: 880px) {
+  .left-bg { position: static; width: 100%; height: 50vh; opacity: 0.5; }
+  .panel { position: static; width: 100%; height: auto; padding: 4vw; }
+  .content { max-width: 100%; border-radius: 10px; padding: 20px; }
+  .hero-title.large { font-size: 1.6rem; }
+}
+</style>
+</head>
+<body>
+<header class="top-bar">
+  <div class="logo-container">
+    <img src="icon.png" alt="FluentHub Logo" class="logo">
+    <span class="site-name">FluentHub</span>
+  </div>
+</header>
+
+<div class="left-bg" aria-hidden="true"></div>
+
+<main class="panel">
+  <div class="content">
+    <h1 class="hero-title large">Master a Lifelong Skill.</h1>
+    <form id="trialForm" novalidate>
+      <div>
+        <label for="name">Name <span class="required-star">*</span></label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div>
+        <label for="email">Email <span class="required-star">*</span></label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div>
+        <label for="mobile">Mobile <span class="required-star">*</span></label>
+        <input type="tel" id="mobile" name="mobile" pattern="\\d{10}" maxlength="10" required>
+      </div>
+      <div>
+        <label for="referral">Referral Code (if available)</label>
+        <!-- allow common alphanumeric codes -->
+        <input type="text" id="referral" name="referral" pattern="[A-Za-z0-9-_]{0,32}">
+      </div>
+      <button type="submit" disabled>Submit</button>
+    </form>
+    <p id="thankYouMsg" style="display:none; font-weight:600; margin-top:15px;">
+      Thank you, our representative will contact you shortly.
+    </p>
+  </div>
+</main>
+
+<script>
+const form = document.getElementById('trialForm');
+const submitBtn = form.querySelector('button');
+
+// Replace with your Google Apps Script Web App /exec URL
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyAc586X7ekrGyNmwnmm1gkKZI8s2fcd_LxEJm6OAMUbIODmaK3H-eNJ68QlceltKB4/exec';
+
+function validateForm() {
+  const name = form.name.value.trim();
+  const email = form.email.value.trim();
+  const mobile = form.mobile.value.trim();
+  const referral = form.referral.value.trim();
+
+  const mobileValid = /^\d{10}$/.test(mobile);
+  const referralValid = referral === '' || /^[A-Za-z0-9-_]{1,32}$/.test(referral);
+
+  submitBtn.disabled = !(name && email && mobileValid && referralValid);
+}
+
+form.addEventListener('input', validateForm);
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  validateForm();
+  if (submitBtn.disabled) return;
+
+  submitBtn.disabled = true;
+
+  const data = new URLSearchParams({
+    name: form.name.value.trim(),
+    email: form.email.value.trim(),
+    mobile: form.mobile.value.trim(),
+    referral: form.referral.value.trim()
+  });
+
+  try {
+    const res = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+      body: data
+    });
+
+    // Expect JSON from Apps Script
+    const payload = await res.json().catch(() => ({}));
+
+    if (payload && payload.success) {
+      document.querySelector('.content').innerHTML =
+        '<p style="font-weight:600; margin-top:15px;">Thank you, our representative will contact you shortly.</p>';
+    } else {
+      throw new Error((payload && payload.error) || 'Unexpected response from server');
+    }
+  } catch (err) {
+    console.error('Submit error:', err);
+    alert('There was an error submitting the form. Please try again.');
+    submitBtn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
