@@ -141,16 +141,24 @@ body {
   box-shadow: 0 4px 10px rgba(10,59,91,0.18);
 }
 
+/* Updated CTA button style */
 .cta {
   display: inline-block;
   margin-top: 18px;
-  padding: 10px 16px;
+  padding: 12px 20px;
   border-radius: 8px;
-  background: transparent;
-  color: var(--accent);
+  background: linear-gradient(135deg, #1E90FF, #4682B4);
+  color: white;
   font-weight: 600;
-  border: 2px solid rgba(10,59,91,0.12);
+  border: none;
   text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.cta:hover {
+  background: linear-gradient(135deg, #4682B4, #1E90FF);
+  transform: translateY(-2px);
 }
 
 /* Responsive: on small screens, stack and center content */
@@ -201,11 +209,13 @@ body {
       <li><span class="dot">✓</span><span><strong>Flexible schedules</strong> that fit your busy life.</span></li>
       <li><span class="dot">✓</span><span><strong>Fast measurable progress</strong> with regular feedback.</span></li>
     </ul>
-    <a class="cta" href="#contact" role="button">Click here to book a free trial</a>
+    <!-- Updated link for booking -->
+    <a class="cta" href="https://fluenthub.org/best-online-english-speaking-course.html" role="button">Click here to book a free trial</a>
   </div>
 </main>
 </body>
 </html>
+
 
 
 
