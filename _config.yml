@@ -1,0 +1,7 @@
+title: "FluentHub News"
+description: "A curated news magazine with analysis, insights, and courses."
+baseurl: "/news"
+url: "https://fluenthub.org"
+theme: minima
+paginate: 10
+paginate_path: "/page:num/"
